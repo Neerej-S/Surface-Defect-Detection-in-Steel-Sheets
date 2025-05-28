@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Defect Detection in Steel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="heading">
+        <h1>Defect Detection in Steel</h1>
+
+        <div class="upload-section">
+            <input type="file" id="imageInput">
+            <button onclick="uploadImage()">Predict</button>
+        </div>
+    
+    <div class="container">
+        <div class="result-section">
+            <h2>Detected Defect:</h2>
+            <p id="prediction">No defect detected yet.</p>
+        </div>
+
+        <div class="image-container">
+            <div class="image-box">
+                <h3>Original Image</h3>
+                <img id="original" src="" alt="Original Image">
+            </div>
+            <div class="image-box">
+                <h3>Heatmap</h3>
+                <img id="heatmap" src="" alt="Heatmap">
+            </div>
+            <div class="image-box">
+                <h3>Bounding Box</h3>
+                <img id="bbox" src="" alt="Bounding Box">
+            </div>
+        </div>
+    </div>
+    <div class="defect-info-section" id="defect-info">
+        <h2>Defect Information</h2>
+        <p>No defect detected yet.</p>
+    </div>
+    
+    </div>
+
+    <script>
+        function uploadImage() {
+            let fileInput = document.getElementById("imageInput").files[0];
+            let formData = new FormData();
+            formData.append("image", fileInput);
+
+            fetch("/predict", { method: "POST", body: formData })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("prediction").innerText = data.defect;
+                document.getElementById("original").src = URL.createObjectURL(fileInput);
+                
+                //  Timestamp for image update
+                let timestamp = new Date().getTime();
+                document.getElementById("heatmap").src = data.heatmap + "?t=" + timestamp;
+                document.getElementById("bbox").src = data.bbox + "?t=" + timestamp;
+
+        updateDefectInfo(data.defect);
+    });
+}
+
+function updateDefectInfo(defect) {
+    let infoSection = document.getElementById("defect-info");
+    let infoContent = "";
+
+    switch (defect.toLowerCase()) {
+        case "scratches":
+            infoContent = `
+                <h2>Scratches</h2>
+<ul>
+    <li><strong>Appearance:</strong> Scratches are long, thin, or deep lines that appear on the steel surface, varying in depth and length.</li>
+</ul>
+
+<h3>Problems:</h3>
+<ul>
+    <li> It reduces the visual appeal and quality of the final product.</li>
+    <li> It weakens the structural integrity, especially in applications requiring high precision.</li>
+    <li> They can act as initiation points for corrosion, reducing the lifespan of the steel.</li>
+    <li> Sometimes,they may cause issues during further processing, such as painting, coating, or welding.</li>
+</ul>
+
+<h3>Causes:</h3>
+<ul>
+    <li>Poor handling during transportation, storage, or processing.</li>
+    <li>Contact with abrasive or hard materials, such as rough rollers or sharp objects.</li>
+    <li>Contaminants or foreign particles present during rolling or machining.</li>
+    <li>Defective rolling processes where uneven pressure or debris creates surface imperfections.</li>
+    <li>Improper cooling, which can make the steel surface more prone to scratches.</li>
+</ul>
+
+<h3>Prevention:</h3>
+<ul>
+    <li>Use protective coatings, such as oil films or plastic wrapping, during transport and storage.</li>
+    <li>Implement proper handling techniques, including soft padding and controlled movement of steel sheets.</li>
+    <li>Ensure all rolling and processing equipment is well-maintained and free from debris.</li>
+    <li>Utilize high-quality lubricants in manufacturing to minimize friction.</li>
+    <li>Regularly inspect steel surfaces for minor scratches before they worsen.</li>
+    <li>Improve manufacturing environments to reduce dust, small metal particles, or abrasive materials that could cause scratches.</li>
+</ul>
+
+            `;
+            break;
+        
+        case "pitted":
+            infoContent = `
+                <h2>Pitted Surface</h2>
+
+<h3>Appearance:</h3>
+<ul>
+    <li>Small, deep holes or depressions scattered across the steel surface.</li>
+    <li>Can appear as tiny pinholes or larger pits, often irregularly distributed.</li>
+    <li>May become more noticeable after machining, coating, or exposure to moisture.</li>
+</ul>
+
+<h3>Problems:</h3>
+<ul>
+    <li>Weakens the structural integrity of the steel, making it prone to failure under stress.</li>
+    <li>Acts as initiation points for corrosion, leading to rapid material degradation.</li>
+    <li>Reduces the smoothness and aesthetic appeal of the steel surface.</li>
+    <li>Complicates coating and finishing processes, affecting adhesion and durability.</li>
+    <li>May cause rejections in industries requiring high precision, such as aerospace and automotive sectors.</li>
+</ul>
+
+<h3>Causes:</h3>
+<ul>
+    <li>Presence of impurities or gas bubbles during the manufacturing process.</li>
+    <li>Corrosion caused by prolonged exposure to moisture, chemicals, or environmental contaminants.</li>
+    <li>Electrochemical reactions leading to localized metal loss.</li>
+    <li>Poor quality raw materials containing non-metallic inclusions or defects.</li>
+    <li>Insufficient deoxidation and degassing treatments during steel production.</li>
+    <li>Use of excessive heat during processing, which can trigger oxidation and pitting.</li>
+</ul>
+
+<h3>Prevention:</h3>
+<ul>
+    <li>Use high-quality raw materials with strict impurity control.</li>
+    <li>Implement proper deoxidation and degassing processes during steel manufacturing.</li>
+    <li>Apply protective coatings or surface treatments to prevent corrosion.</li>
+    <li>Ensure adequate cooling and controlled exposure to environmental factors.</li>
+    <li>Regularly inspect and maintain equipment to prevent contamination during processing.</li>
+    <li>Optimize casting and rolling techniques to minimize gas entrapment and surface irregularities.</li>
+</ul>
+
+            `;
+            break;
+
+        case "rolled":
+            infoContent = `
+                <h2>Rolled-in Scale</h2>
+
+<h3>Appearance:</h3>
+<ul>
+    <li>Thin, flaky layers of oxidized metal embedded into the steel surface.</li>
+    <li>Appears as dark, rough patches or streaks, often with a bluish or blackish tint.</li>
+    <li>Typically found on hot-rolled steel, especially when scaling is not properly removed.</li>
+</ul>
+
+<h3>Problems:</h3>
+<ul>
+    <li>Reduces the surface quality, making it unsuitable for applications requiring a smooth finish.</li>
+    <li>Weakens adhesion of coatings, paints, and protective layers.</li>
+    <li>Can lead to structural weaknesses, causing localized stress points.</li>
+    <li>Increases the risk of corrosion due to trapped oxidation layers.</li>
+    <li>Requires additional processing such as grinding or pickling, adding to production costs.</li>
+</ul>
+
+<h3>Causes:</h3>
+<ul>
+    <li>Incomplete removal of oxide scale before rolling.</li>
+    <li>High-temperature exposure during hot rolling, leading to excessive oxidation.</li>
+    <li>Improper descaling processes, such as inefficient water jet or acid treatment.</li>
+    <li>Rolling over existing scale layers, pressing them into the steel surface.</li>
+    <li>Use of contaminated rolling equipment, transferring scale onto new sheets.</li>
+</ul>
+
+<h3>Prevention:</h3>
+<ul>
+    <li>Implement effective descaling techniques before rolling, such as high-pressure water jets.</li>
+    <li>Optimize temperature control during hot rolling to minimize excessive oxidation.</li>
+    <li>Regularly inspect and clean rolling equipment to prevent contamination.</li>
+    <li>Use acid pickling or mechanical brushing to remove residual scale before finishing.</li>
+    <li>Ensure proper cooling and handling to avoid re-oxidation after processing.</li>
+</ul>
+
+            `;
+            break;
+
+        case "inclusion":
+            infoContent = `
+                <h2>Inclusion</h2>
+
+<h3>Appearance:</h3>
+<ul>
+    <li>Small, non-metallic particles or impurities embedded within the steel.</li>
+    <li>Can appear as dark spots, streaks, or irregular marks on the surface.</li>
+    <li>May be visible under magnification or during machining processes.</li>
+</ul>
+
+<h3>Problems:</h3>
+<ul>
+    <li>Reduces the mechanical strength and ductility of the steel.</li>
+    <li>Creates weak points, increasing the risk of cracking or failure under stress.</li>
+    <li>Affects the steel's surface quality, making it unsuitable for high-precision applications.</li>
+    <li>Leads to inconsistencies in welding and forming processes.</li>
+    <li>Can cause early fatigue failure in structural and industrial components.</li>
+</ul>
+
+<h3>Causes:</h3>
+<ul>
+    <li>Presence of non-metallic impurities such as oxides, sulfides, or silicates during steelmaking.</li>
+    <li>Improper refining process, leading to incomplete removal of contaminants.</li>
+    <li>Inconsistent or inadequate deoxidation and desulfurization treatments.</li>
+    <li>Defective casting processes, allowing foreign particles to remain in the steel matrix.</li>
+    <li>Unclean manufacturing environments leading to external contamination.</li>
+</ul>
+
+<h3>Prevention:</h3>
+<ul>
+    <li>Use high-quality raw materials with strict impurity control.</li>
+    <li>Implement advanced refining techniques such as vacuum degassing to remove impurities.</li>
+    <li>Ensure proper filtration and secondary refining to minimize inclusions.</li>
+    <li>Maintain strict cleanliness standards in the manufacturing environment.</li>
+    <li>Conduct rigorous quality control and testing to detect inclusions early.</li>
+    <li>Use continuous casting techniques to reduce impurity entrapment.</li>
+</ul>
+
+            `;
+            break;
+
+        case "crazing":
+            infoContent = `
+               <h2>Crazing</h2>
+
+<h3>Appearance:</h3>
+<ul>
+    <li>Fine cracks or a network of thin, shallow lines on the steel surface.</li>
+    <li>May appear as a web-like or netted pattern of small fractures.</li>
+    <li>Usually found in coated or treated steel, affecting surface integrity.</li>
+</ul>
+
+<h3>Problems:</h3>
+<ul>
+    <li>Weakens the protective coatings, making the steel more vulnerable to corrosion.</li>
+    <li>Reduces mechanical strength, increasing the likelihood of further cracking under stress.</li>
+    <li>Decreases aesthetic appeal, especially in visible applications.</li>
+    <li>Can lead to coating delamination, exposing the underlying metal to environmental damage.</li>
+    <li>Compromises the steel's lifespan, requiring additional maintenance or replacement.</li>
+</ul>
+
+<h3>Causes:</h3>
+<ul>
+    <li>Excessive stress or strain during the cooling or rolling process.</li>
+    <li>Use of low-quality coatings that cannot expand or contract with the metal.</li>
+    <li>Thermal expansion and contraction, leading to micro-fractures over time.</li>
+    <li>Improper heat treatment, causing surface brittleness.</li>
+    <li>Exposure to extreme environmental conditions, such as rapid temperature changes.</li>
+    <li>Chemical reactions between the surface coating and environmental pollutants.</li>
+</ul>
+
+<h3>Prevention:</h3>
+<ul>
+    <li>Use high-quality coatings that provide flexibility and durability.</li>
+    <li>Ensure proper heat treatment processes to control steel hardness and stress distribution.</li>
+    <li>Implement gradual cooling processes to minimize thermal stress.</li>
+    <li>Conduct regular inspections to detect early signs of crazing and take preventive action.</li>
+    <li>Apply protective finishes or sealants to enhance resistance against environmental factors.</li>
+    <li>Maintain controlled temperature and humidity conditions during steel processing and storage.</li>
+</ul>
+
+            `;
+            break;
+
+        case "patches":
+            infoContent = `
+                <h2>Patches</h2>
+
+<h3>Appearance:</h3>
+<ul>
+    <li>Irregular, discolored, or rough spots on the steel surface.</li>
+    <li>May appear as dull or shiny regions, depending on the defect type.</li>
+    <li>Uneven texture, affecting the uniformity of the steel.</li>
+</ul>
+
+<h3>Problems:</h3>
+<ul>
+    <li>Reduces the aesthetic quality and smooth finish of the steel.</li>
+    <li>Can affect surface treatments like coating, painting, or galvanization.</li>
+    <li>May indicate underlying issues such as oxidation, contamination, or material inconsistencies.</li>
+    <li>Weakens corrosion resistance, leading to potential long-term degradation.</li>
+    <li>Causes rejection or rework in industries that require high surface quality, such as automotive and construction.</li>
+</ul>
+
+<h3>Causes:</h3>
+<ul>
+    <li>Uneven cooling during steel processing, leading to texture variations.</li>
+    <li>Impurities or foreign materials present during rolling or casting.</li>
+    <li>Incomplete cleaning of the steel surface before coating or finishing.</li>
+    <li>Oxidation during manufacturing due to improper temperature control.</li>
+    <li>Defective raw materials that lead to inconsistencies in the steel structure.</li>
+    <li>Exposure to moisture or environmental contaminants during storage.</li>
+</ul>
+
+<h3>Prevention:</h3>
+<ul>
+    <li>Ensure uniform temperature control during processing to prevent uneven cooling.</li>
+    <li>Use high-quality raw materials with proper composition control.</li>
+    <li>Implement rigorous surface cleaning before finishing, painting, or coating.</li>
+    <li>Apply protective coatings immediately after processing to prevent oxidation.</li>
+    <li>Regularly inspect and maintain machinery to avoid contamination and material inconsistencies.</li>
+    <li>Store steel in controlled environments to minimize exposure to humidity and dust.</li>
+</ul>
+
+            `;
+            break;
+
+        default:
+            infoContent = "<p>No defect detected or unknown defect type.</p>";
+            break;
+    }
+
+    infoSection.innerHTML = infoContent;
+    infoSection.style.color = "white"; 
+    infoSection.style.padding = "20px"; 
+    infoSection.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+    infoSection.style.borderRadius = "10px";
+
+
+}
+            
+        
+    </script>
+
+</body>
+</html>
