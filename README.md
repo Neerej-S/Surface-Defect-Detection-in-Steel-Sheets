@@ -24,11 +24,12 @@ Based on the analysis of images of steel surface, the model will label them as e
 *Data Augmentation* to increase dataset diversity:
 Rotation, Horizontal/Vertical Flipping, Brightness Adjustment ,Contrast Enhancement
 
-Ensures model generalization and robustness under real-world conditions
-
 **Model Training**:Applied transfer learning with hyperparameter tuning for optimal performance. Compared with VGG16 and EfficientNet for accuracy and efficiency.
+**Model Accuracy**:ResNet-18 achieved the highest accuracy of **99.4%**, outperforming VGG16 (**88%**) and EfficientNet (**91%**).It showed the best balance between accuracy and speed, ideal for real-time applications.
 
 **Deployment**:Integrated the trained model into a Flask-based web application for real-time prediction and user interaction.
+Prediction time per image: <1.2 seconds on average.
+Easy user interaction with immediate classification results.
 
 # System Architecture
 ![image](https://github.com/user-attachments/assets/bad8621c-61fa-4437-8738-606883e6fb25)
