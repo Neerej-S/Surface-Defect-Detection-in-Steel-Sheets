@@ -10,7 +10,8 @@ Based on the analysis of images of steel surface, the model will label them as e
 
 **Deep Learning Model**:Utilized ResNet-18, a convolutional neural network (CNN), for accurate classification of steel surface defects.
 
-**Dataset**:Used the NEU Surface Defect Database, which contains high-resolution images across six defect types: scratches, rolled-in scale, pitted surface, patches, inclusions, and crazing.
+**Dataset**:Used the NEU Surface Defect Database, which contains high-resolution images of size 200x200 pixels across six defect types: scratches, rolled-in scale, pitted surface, patches, inclusions, and crazing.
+![Dataset](https://github.com/user-attachments/assets/721559e0-acc3-41cd-8b9c-f5e9e85fe22f)
 
 **Preprocessing Techniques**:Image normalization, resizing, contrast enhancement, and data augmentation
 
