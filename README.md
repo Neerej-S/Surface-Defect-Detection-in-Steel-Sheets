@@ -42,4 +42,15 @@ Easy user interaction with immediate classification results.
 
 ![image](https://github.com/user-attachments/assets/12d3997c-2e60-42cc-b758-4d59d885c378)
 
+![image](https://github.com/user-attachments/assets/e4e905c2-2f0c-4d04-a608-b78391389e32)
+
+# Conclusion
+
+The project developed a ResNet-18-based model for steel surface defect detection with 99.4% accuracy.
+
+It enables accurate, real-time classification of six defect types through a web-based interface.
+
+The system improves manufacturing quality control and minimizes manual inspection errors
+
+
 
