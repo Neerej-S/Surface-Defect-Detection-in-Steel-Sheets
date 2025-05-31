@@ -19,4 +19,5 @@ Based on the analysis of images of steel surface, the model will label them as e
 **Deployment**:Integrated the trained model into a Flask-based web application for real-time prediction and user interaction.
 
 # System Architecture
-![System Architecture](https://github.com/user-attachments/assets/3335b506-3e76-462f-85ac-676c65cfca01)
+![image](https://github.com/user-attachments/assets/bad8621c-61fa-4437-8738-606883e6fb25)
+
