@@ -15,13 +15,20 @@ Based on the analysis of images of steel surface, the model will label them as e
 
 **Preprocessing Techniques**:Image normalization, resizing, noise reduction, and data augmentation
 *Resizing* all images to fit model input requirements.
+
 *Image Normalization* to scale pixel values between 0 and 1.
+
 *Noise Reduction* to remove unwanted pixel artifacts.
+
 *Data Augmentation* to increase dataset diversity:
 Rotation
+
 Horizontal/Vertical Flipping
+
 Brightness Adjustment
+
 Contrast Enhancement
+
 Ensures model generalization and robustness under real-world conditions
 
 **Model Training**:Applied transfer learning with hyperparameter tuning for optimal performance. Compared with VGG16 and EfficientNet for accuracy and efficiency.
