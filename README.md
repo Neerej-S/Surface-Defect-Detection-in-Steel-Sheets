@@ -17,3 +17,6 @@ Based on the analysis of images of steel surface, the model will label them as e
 **Model Training**:Applied transfer learning with hyperparameter tuning for optimal performance. Compared with VGG16 and EfficientNet for accuracy and efficiency.
 
 **Deployment**:Integrated the trained model into a Flask-based web application for real-time prediction and user interaction.
+
+# System Architecture
+![System Architecture](https://github.com/user-attachments/assets/3335b506-3e76-462f-85ac-676c65cfca01)
