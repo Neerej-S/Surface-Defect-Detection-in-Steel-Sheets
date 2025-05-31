@@ -13,7 +13,16 @@ Based on the analysis of images of steel surface, the model will label them as e
 **Dataset**:Used the NEU Surface Defect Database, which contains high-resolution images of size 200x200 pixels across six defect types: scratches, rolled-in scale, pitted surface, patches, inclusions, and crazing.
 ![Dataset](https://github.com/user-attachments/assets/721559e0-acc3-41cd-8b9c-f5e9e85fe22f)
 
-**Preprocessing Techniques**:Image normalization, resizing, contrast enhancement, and data augmentation
+**Preprocessing Techniques**:Image normalization, resizing, noise reduction, and data augmentation
+*Resizing* all images to fit model input requirements.
+*Image Normalization* to scale pixel values between 0 and 1.
+*Noise Reduction* to remove unwanted pixel artifacts.
+*Data Augmentation* to increase dataset diversity:
+Rotation
+Horizontal/Vertical Flipping
+Brightness Adjustment
+Contrast Enhancement
+Ensures model generalization and robustness under real-world conditions
 
 **Model Training**:Applied transfer learning with hyperparameter tuning for optimal performance. Compared with VGG16 and EfficientNet for accuracy and efficiency.
 
