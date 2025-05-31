@@ -21,13 +21,7 @@ Based on the analysis of images of steel surface, the model will label them as e
 *Noise Reduction* to remove unwanted pixel artifacts.
 
 *Data Augmentation* to increase dataset diversity:
-Rotation
-
-Horizontal/Vertical Flipping
-
-Brightness Adjustment
-
-Contrast Enhancement
+Rotation, Horizontal/Vertical Flipping, Brightness Adjustment ,Contrast Enhancement
 
 Ensures model generalization and robustness under real-world conditions
 
