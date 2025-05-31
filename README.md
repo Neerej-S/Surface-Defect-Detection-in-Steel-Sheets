@@ -5,3 +5,11 @@ Steel surface defect detection is crucial for maintaining product quality and en
 Data augmentation methods, including rotation, flipping, and contrast adjustment, are used to improve model generalization. Grad-CAM was utilized to enhance interpretability by visualizing the location of defects. The suggested ResNet-18 model performs better than traditional CNN architectures, locating defect more accurately and effectively. ResNet-18 is a reliable and scalable steel quality control solution that supports intelligent manufacturing and avoids defects when compared to traditional methods.
 
 Based on the analysis of images of steel surface, the model will label them as either defect or non defect. Users can upload pictures for real-time diagnosis through the system, which is designed as a web application using Flask. This method facilitates precision steel manufacturing, promotes sustainable manufacturing, and enhances early defect detection.
+
+# Proposed Methodology
+
+Deep Learning Model:Utilized ResNet-18, a convolutional neural network (CNN), for accurate classification of steel surface defects.
+Dataset:Used the NEU Surface Defect Database, which contains high-resolution images across six defect types: scratches, rolled-in scale, pitted surface, patches, inclusions, and crazing.
+Preprocessing Techniques:Image normalization, resizing, contrast enhancement, and data augmentation
+Model Training:Applied transfer learning with hyperparameter tuning for optimal performance. Compared with VGG16 and EfficientNet for accuracy and efficiency.
+Deployment:Integrated the trained model into a Flask-based web application for real-time prediction and user interaction.
