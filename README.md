@@ -50,7 +50,7 @@ The project developed a ResNet-18-based model for steel surface defect detection
 
 It enables accurate, real-time classification of six defect types through a web-based interface.
 
-The system improves manufacturing quality control and minimizes manual inspection errors
+The system improves manufacturing quality control and minimizes manual inspection errors.
 
 
 
