@@ -37,3 +37,9 @@ Easy user interaction with immediate classification results.
 # System Architecture
 ![image](https://github.com/user-attachments/assets/bad8621c-61fa-4437-8738-606883e6fb25)
 
+# Result/Output
+![image](https://github.com/user-attachments/assets/c6b7573c-fd41-43f8-83b5-2b74aac3ca9c)
+
+![image](https://github.com/user-attachments/assets/12d3997c-2e60-42cc-b758-4d59d885c378)
+
+
