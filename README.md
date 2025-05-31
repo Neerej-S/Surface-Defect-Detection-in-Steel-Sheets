@@ -8,12 +8,12 @@ Based on the analysis of images of steel surface, the model will label them as e
 
 # Proposed Methodology
 
-Deep Learning Model:Utilized ResNet-18, a convolutional neural network (CNN), for accurate classification of steel surface defects.
+**Deep Learning Model**:Utilized ResNet-18, a convolutional neural network (CNN), for accurate classification of steel surface defects.
 
-Dataset:Used the NEU Surface Defect Database, which contains high-resolution images across six defect types: scratches, rolled-in scale, pitted surface, patches, inclusions, and crazing.
+**Dataset**:Used the NEU Surface Defect Database, which contains high-resolution images across six defect types: scratches, rolled-in scale, pitted surface, patches, inclusions, and crazing.
 
-Preprocessing Techniques:Image normalization, resizing, contrast enhancement, and data augmentation
+**Preprocessing Techniques**:Image normalization, resizing, contrast enhancement, and data augmentation
 
-Model Training:Applied transfer learning with hyperparameter tuning for optimal performance. Compared with VGG16 and EfficientNet for accuracy and efficiency.
+**Model Training**:Applied transfer learning with hyperparameter tuning for optimal performance. Compared with VGG16 and EfficientNet for accuracy and efficiency.
 
-Deployment:Integrated the trained model into a Flask-based web application for real-time prediction and user interaction.
+**Deployment**:Integrated the trained model into a Flask-based web application for real-time prediction and user interaction.
