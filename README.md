@@ -14,6 +14,7 @@ Based on the analysis of images of steel surface, the model will label them as e
 ![Dataset](https://github.com/user-attachments/assets/721559e0-acc3-41cd-8b9c-f5e9e85fe22f)
 
 **Preprocessing Techniques**:Image normalization, resizing, noise reduction, and data augmentation
+
 *Resizing* all images to fit model input requirements.
 
 *Image Normalization* to scale pixel values between 0 and 1.
